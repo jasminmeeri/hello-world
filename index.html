@@ -10,15 +10,18 @@
 <div class="container">
     <div class="todo-app">
         <h1>Jas's To-Do List <img src="images/todolist.png" alt="To-Do Icon"></h1> 
-        <div class="row">
-            <input type="text" id="input-box" placeholder="I need to...">
-            <button id="add-btn" onclick="AddTask()">Add</button>   
-        </div>
+        <form id="task-form" class="row" novalidate>
+            <input type="text" id="input-box" placeholder="I need to..." required minlength="3" aria-describedby="input-error">
+            <button id="add-btn" type="submit">Add</button>
+        </form>
+        <p id="input-error" class="error-message" role="alert" hidden></p>
         <ul id="list-container">
-            <!-- li class="checked">Task 1</li>
-            <li>Task 2</li>
-            <li>Task 3</li> -->
         </ul>
+        <div class="task-filters" role="group" aria-label="Filter tasks">
+            <button type="button" data-filter="all" aria-pressed="true">All</button>
+            <button type="button" data-filter="active" aria-pressed="false">Active</button>
+            <button type="button" data-filter="completed" aria-pressed="false">Completed</button>
+        </div>
     </div>
 </div>
 <script src="script.js"></script>

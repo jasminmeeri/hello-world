@@ -1,42 +1,106 @@
+// Get the form elements and task list.
 const inputBox = document.getElementById("input-box");
-
 const listContainer = document.getElementById("list-container");
+const taskForm = document.getElementById("task-form");
+const inputError = document.getElementById("input-error");
+const taskFilters = document.querySelector(".task-filters");
+const minimumTaskLength = 3;
+let currentFilter = "all";
 
-// Gives user an alert if they try to add an empty task, otherwise adds the task to the list
-function AddTask(){
-    if(inputBox.value === ''){
-        alert("You must write something here!");
-    }
-    else{
-        let li = document.createElement("li");
-        li.innerHTML = inputBox.value;
-        listContainer.appendChild(li);
-        // Creates a span element to add a delete button, a cross to each task
-        let span = document.createElement("span");
-        span.innerHTML = "\u00d7";
-        li.appendChild(span);
+taskForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    const taskText = inputBox.value.trim();
+
+    // Check that the text typed in is long enough before adding it.
+    if (taskText.length < minimumTaskLength) {
+        taskForm.classList.add("error");
+        inputBox.setAttribute("aria-invalid", "true");
+        inputError.textContent = taskText.length === 0
+            ? "Enter a task."
+            : `Enter at least ${minimumTaskLength} characters.`;
+        inputError.hidden = false;
+        inputBox.focus();
+        return;
     }
 
-    // Clears the input box after adding a task, otherwise task would be still shown there. Also saving the data to local storage so that it doesn't disappear when closing the tab or refreshing the page
+    const li = document.createElement("li");
+    li.textContent = taskText;
+
+    const span = document.createElement("span");
+    span.textContent = "\u00d7";
+    li.appendChild(span);
+
+    listContainer.appendChild(li);
+    updateTaskVisibility();
     inputBox.value = "";
+    taskForm.classList.remove("error");
+    inputBox.setAttribute("aria-invalid", "false");
+    inputError.hidden = true;
+    inputError.textContent = "";
     saveData();
-}
+});
 
-
-listContainer.addEventListener("click", function(e){
-    if(e.target.tagName === "LI"){
-        e.target.classList.toggle("checked");
+inputBox.addEventListener("input", function () {
+    if (inputBox.value.trim().length >= minimumTaskLength) {
+        taskForm.classList.remove("error");
+        inputBox.setAttribute("aria-invalid", "false");
+        inputError.hidden = true;
+        inputError.textContent = "";
     }
-    else if(e.target.tagName === "SPAN"){
-        e.target.parentElement.remove();
+});
+
+taskFilters.addEventListener("click", function (event) {
+    const selectedButton = event.target.closest("button[data-filter]");
+    if (!selectedButton) {
+        return;
+    }
+
+    currentFilter = selectedButton.dataset.filter;
+    taskFilters.querySelectorAll("button[data-filter]").forEach(function (button) {
+        button.setAttribute("aria-pressed", String(button === selectedButton));
+    });
+    updateTaskVisibility();
+});
+
+// Mark a task as complete or remove it when clicked.
+listContainer.addEventListener("click", function (e) {
+    const clickedItem = e.target.closest("li");
+    const deleteButton = e.target.closest("span");
+
+    if (deleteButton) {
+        deleteButton.parentElement.remove();
+        saveData();
+        return;
+    }
+
+    if (clickedItem) {
+        clickedItem.classList.toggle("checked");
+        updateTaskVisibility();
+        saveData();
     }
 }, false);
 
-//have to save the data, otherwise it dissappears when closing tab or refreshing the page
-function saveData(){
+function updateTaskVisibility() {
+    listContainer.querySelectorAll("li").forEach(function (task) {
+        const isCompleted = task.classList.contains("checked");
+        task.hidden = currentFilter === "active"
+            ? isCompleted
+            : currentFilter === "completed" && !isCompleted;
+    });
+}
+
+// Have to save the data, otherwise it disappears when closing tab or refreshing the page.
+function saveData() {
     localStorage.setItem("data", listContainer.innerHTML);
 }
-function showTask(){
-    listContainer.innerHTML = localStorage.getItem("data");
+
+function showTask() {
+    // Restore saved tasks when the page loads.
+    const savedData = localStorage.getItem("data");
+    if (savedData) {
+        listContainer.innerHTML = savedData;
+    }
+    updateTaskVisibility();
 }
+
 showTask();

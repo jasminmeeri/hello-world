@@ -5,6 +5,7 @@
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+/* Page background and layout */
 .container{
     width: 100%;
     min-height: 100vh;
@@ -35,6 +36,7 @@
     margin-left: 15px;
 }
 
+/* Task input form */
 .row{
     display: flex;
     justify-content: space-between;
@@ -51,6 +53,17 @@
     border: 2px solid #ff4d4f;
 }
 
+.error-message{
+    color: #b42318;
+    font-size: 14px;
+    margin: -15px 0 15px 20px;
+}
+
+.error-message[hidden]{
+    display: none;
+}
+
+/* Input and submit button */
 input{
     flex: 1;
     border: none;
@@ -59,6 +72,10 @@ input{
     padding: 10px 15px;
     font-size: 17px;
     font-weight: 500;
+}
+
+.row.error input{
+    box-shadow: inset 0 0 0 1px #ff4d4f;
 }
 
 button{
@@ -72,7 +89,7 @@ button{
     transition: all 0.3s ease;
 }
 
-
+/* Task list and completion icons */
 ul li {
     list-style: none;
     font-size: 17px;
@@ -113,6 +130,7 @@ ul li.checked::before{
     background-image: url(images/check.png);
 }
 
+/* Remove option for each task */
 ul li span{
     position: absolute;
     right: 0px;
@@ -130,4 +148,31 @@ ul li span{
 
 ul li span:hover{
     color: #bfc7b440;
+}
+
+/* Task status filters */
+.task-filters{
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.task-filters button{
+    padding: 8px 14px;
+    background: transparent;
+    color: #083602;
+    border: 1px solid #083602;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.task-filters button[aria-pressed="true"]{
+    background: #083602;
+    color: #fff;
+}
+
+.task-filters button:focus-visible{
+    outline: 2px solid #083602;
+    outline-offset: 2px;
 }
