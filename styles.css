@@ -1,1 +1,133 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
 
+.container{
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #04321c, #5f30ebb8);
+    padding: 10px;
+}
+
+.todo-app{
+    width: 100%;
+    max-width: 600px;
+    margin: 100px auto 20px;
+    background: #fff;
+    padding: 40px 30px 70px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.todo-app h1{
+    color: #000000;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.todo-app h1 img{
+    width: 40px;
+    height: 40px;
+    margin-left: 15px;
+}
+
+.row{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    padding-left: 20px;
+    border-radius: 30px;
+    align-items: center;
+    background: #bfc7b440;
+}
+
+
+/* indicates error in the input box when user tries to add an empty task */
+.row.error{
+    border: 2px solid #ff4d4f;
+}
+
+input{
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 10px 15px;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+button{
+    padding: 16px 50px;
+    background: #083602;
+    color: #fff;
+    border: none;
+    outline: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+
+ul li {
+    list-style: none;
+    font-size: 17px;
+    padding: 12px 8px 12px 50px; /* my radio icon did not have space on the left, so I added 50px to the left padding to make it look better */
+    background: #bfc7b440;
+    margin-bottom: 10px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none;
+    position: relative;
+}
+
+/* Add a radio button/unchecked icon before each list item */
+
+ul li::before{
+    content: '';
+    position: absolute;
+    height: 28px;
+    width: 28px;
+    border-radius: 50%;
+    background-image: url(images/radio.png);
+    background-size: cover;
+    background-position: center;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 15px;
+    
+}
+
+/* When the list item is clicked, change the background image to a checked icon and a line through the text */
+ul li.checked{
+    color: #555;
+    text-decoration: line-through;
+}
+
+ul li.checked::before{
+    background-image: url(images/check.png);
+}
+
+ul li span{
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    width: 40px;
+    height: 40px;
+    transform: translateY(-50%);
+    color: #555555;
+    font-size: 22px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+ul li span:hover{
+    color: #bfc7b440;
+}
