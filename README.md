@@ -1,10 +1,12 @@
 # hello-world
 Link to my website: https://jasminmeeri.github.io/hello-world/
 
-Plan and wireframe:
+Plan:
 My plan is to build a simple minimalist To-Do List web app that is fully responsive. I will be using HTML, CSS and JavaScript.
 Core Feature is the task management: to be able to add new tasks, mark them as completed and to delete tasks one by one. I want to be able to control the input so that empty or short inputs are not allowed and the user will be notified in that case.
 I want to learn how to use localStorage to store the data automatically so that it doesn't dissappear when browser is refreshed or restarted.
+
+Wireframe (made with Figma): https://www.figma.com/design/ceYMXx3OdzCmLCITY2fN32/Untitled?node-id=0-1&t=zjqKbyBsiYHIXEYk-1
 
 Link to the presentation video:
 
