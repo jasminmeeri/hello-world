@@ -8,12 +8,17 @@ I want to learn how to use localStorage to store the data automatically so that 
 
 Wireframe (made with Figma): https://www.figma.com/design/ceYMXx3OdzCmLCITY2fN32/Untitled?node-id=0-1&t=zjqKbyBsiYHIXEYk-1
 
+
 Link to the presentation video:
 
+
+
 Images from https://flaticon.com
+Flaticon n.d. Flaticon. Accessed 26 October 2026. https://flaticon.com
 
 Tutorial used to figure out the basics: 
 How To Create To-Do List App Using HTML CSS And JavaScript | Task App In JavaScript by GreatStack: https://youtu.be/G0jO8kUrg-I?si=Bv3_cdDTfGrVOQ2B
+GreatStack n.d. How to create To-Do List App using HTML CSS and JavaScript | Task App in JavaScript [YouTube video]. Accessed 27 October 2026. https://youtu.be/G0jO8kUrg-I?si=Bv3_cdDTfGrVOQ2B
 
 Gemini AI used to check code for any errors, for helping to fix them and to suggest improvements. Also to explain justifications for why to code something in a certain way. In the end I wanted to also test the Visual Studio Code AI Agent, so I used it for the All/Active/Completed part of the code. 
 
